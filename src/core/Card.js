@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import ShowImage from './ShowImage';
 
 const Card = ({ product }) => {
-
+	
+	let thickness = product["parameters.thickness"];
+	//alert(thickness);
+                    //<p>thickness : {thickness}</p>
+					
     return (
         <div className='col-4 mb-3'>
             <div className='card'>
@@ -11,7 +15,8 @@ const Card = ({ product }) => {
                 <div className='card-body'>
                     <ShowImage item={product} url='product' />
                     <p>{product.description.substring(0, 100)}</p>
-                    <p>${product.price}</p>
+                    <p>€{product.price}</p>
+                    <p>quantity {product.quantity}</p>
                     <Link to='/'>
                         <button className='btn btn-outline-primary mt-2 mb-2 mr-2'>
                             View Product

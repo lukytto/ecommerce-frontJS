@@ -31,13 +31,14 @@ const Card = ({ product, showViewProductButton = true, showExpandedInfo = false 
     };
 	//padaryk, kad rodytu tik tada parametrus, kai jie nera null
 	const showDetailedInfo = showExpandedInfo => {
+		
         return (
             showExpandedInfo && (
 			<div >
                 <p className='black-8' id='subcategory'>
-                    Sub Category: {product.sub_category
+                    Subcategory: {product.sub_category
                         && product.sub_category.name}</p>
-                <p className='black-7'>
+                <p className='black-7' id='subsubcategory'>
                     Type: {product.sub_sub_category
                         && product.sub_sub_category.name}</p>
 						
@@ -48,15 +49,25 @@ const Card = ({ product, showViewProductButton = true, showExpandedInfo = false 
         );
     };
 		
-	const hideNullFields = () => {
-			//alert(product.sub_category);
-		if(product.category == null)
+	const hideNullFields = showExpandedInfo => {
+		if(showExpandedInfo)
 		{
-			//alert("category is null");
-		}
-		if(product.sub_category != null)
-		{
-			//alert(product.sub_sub_category.name + " " + product.category.name);
+			if(product.sub_category == null)
+			{
+				let variable = document.getElementById("subcategory");
+				if(variable != null)
+				{	
+					variable.style.display = "none";
+				}
+			}
+			if(product.sub_sub_category == null)
+			{
+				let variable = document.getElementById("subsubcategory");
+				if(variable != null)
+				{	
+					variable.style.display = "none";
+				}
+			}
 		}
 	}
 
@@ -72,7 +83,7 @@ const Card = ({ product, showViewProductButton = true, showExpandedInfo = false 
                     Category: {product.category
                         && product.category.name}</p>
 				{showDetailedInfo(showExpandedInfo)}
-				{hideNullFields()}
+				{hideNullFields(showExpandedInfo)}
 				
                 {showStock(product.quantity)}
                 <br />

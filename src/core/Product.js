@@ -4,10 +4,12 @@ import { read, listRelated } from './apiCore';
 import Card from './Card';
 
 const Product = (props) => {
+	
 
     const [product, setProduct] = useState({});
     const [relatedProduct, setRelatedProduct] = useState([]);
     const [error, setError] = useState(false);
+	
 
     const loadSigleProduct = productId => {
         read(productId).then(data => {
@@ -19,12 +21,14 @@ const Product = (props) => {
                 listRelated(data._id).then(data => {
                     if (data.error) {
                         setError(data.error);
+						
                     } else {
                         setRelatedProduct(data);
                     }
                 });
             }
         });
+		
 
     };
 

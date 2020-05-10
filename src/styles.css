@@ -57,10 +57,10 @@ jumbotron effects
 /**** Custom styles for noUiSlider ****/
 
 .noUi-horizontal .noUi-connect {
-	background: green;
+	background: #007bff;
 }
 .noUi-horizontal .noUi-handle, .noUi-vertical .noUi-handle {
-	background: green;
+	background: #007bff;
 	width: 1px;
 	height: 1px;
 	left: 6px;
@@ -86,85 +86,7 @@ jumbotron effects
     width: calc(1% + 34px);
 }
 
-/*
-$control-height: 40px;
-$control-width: 80px;
-$control-color: rgb(94,55,142);
-$control-font-size: 18px;
-$control-font-weight: 100;
-$fill-color: darken($control-color, 10%);
-$gutter-height: 16px;
 
-.noUi-background {
-  height: $gutter-height;
-  &.noUi-vertical {
-    height: 200px;
-    width: $gutter-height;
-    margin: 0 auto 30px;
-  }
-}
-.noUi-base {
-  
-  .noUi-connect {
-    background-color: $fill-color;
-  }
-  .noUi-handle {
-    background-color: $control-color;
-    border: none;
-    border-radius: 6px;
-    box-shadow: none;
-    color: #FFFFFF;
-    display: table;
-    font-size: 15px;
-    height: $control-height;
-    left: 0;
-    margin-left: -22px;
-    margin-top: -($control-height/2) + $gutter-height/2 - 1;
-    padding: 0;
-    position: absolute;
-    text-align: center;
-    top: 0;
-    width: $control-width;
-    z-index: 2;
-    
-    .noUi-horizontal & {
-      cursor: ew-resize;
-    }
-    
-    .noUi-vertical & {
-      cursor: ns-resize;
-      margin-left: -($control-width/2) + $gutter-height/2;
-    }
-    
-    &:hover {
-      background-color: lighten($control-color, 10%);
-    }
-    
-    &.noUi-active {
-      background-color: darken($control-color, 10%);
-      z-index: 3;
-    }
-
-    &::before {
-      background: transparent;
-      content: attr(data-value);
-      display: table-cell;
-      font-size: $control-font-size;
-      font-weight: $control-font-weight;
-      position: static;
-      width: 100%;
-      vertical-align: middle;
-    }
-    &::after {
-      display: none;
-    }
-  }
-}
-*/
-
-/**
-border radius
-*/
 .btn,
 .jumbotron,
 .nav :hover {

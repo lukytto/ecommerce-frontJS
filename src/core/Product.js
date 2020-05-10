@@ -3,7 +3,6 @@ import Layout from './Layout';
 import { read, listRelated } from './apiCore';
 import Card from './Card';
 
-
 const Product = (props) => {
 
     const [product, setProduct] = useState({});
@@ -45,7 +44,8 @@ const Product = (props) => {
                     {product
                         && product.description &&
                         <Card product={product}
-                            showViewProductButton={false} />
+                            showViewProductButton={false} 
+							showExpandedInfo={true}/>
                     }
                 </div>
                 <div className='col-4'>

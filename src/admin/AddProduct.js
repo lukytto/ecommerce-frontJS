@@ -16,6 +16,7 @@ const AddProduct = () => {
         sub_category: '',
         sub_sub_categories: [],
         sub_sub_category: '',
+		"parameters.thickness": '',
         shipping: '',
         quantity: '',
         photo: '',
@@ -28,6 +29,7 @@ const AddProduct = () => {
     });
 
     const { user, token } = isAuthenticated();
+	const thickness = values["parameters.thickness"];
 
     const {
         name,
@@ -184,6 +186,10 @@ const AddProduct = () => {
                 </select>
             </div>
 			
+            <div className='form-group'>
+                <label className='text-muted'>Thickness</label>
+                <input onChange={handleChange('parameters.thickness')} type='number' className='form-control' value={thickness}></input>
+            </div>			
 
             <div className='form-group'>
                 <label className='text-muted'>Quantity</label>

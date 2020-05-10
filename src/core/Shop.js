@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from './Layout';
 import Card from './Card';
 import {getCategories, getSub_categories, getSub_sub_categories, getFilteredProducts } from './apiCore';
-import {CategoryCheckbox, SubCategoryCheckbox, TypeCheckbox} from './Checkbox';
+import CheckBox from './Checkbox';
 import {createPriceSlider, createThicknessSlider} from './Sliders';
 
 import noUiSlider from 'nouislider';
@@ -178,7 +178,7 @@ const Shop = () => {
 					<div>
 						<h4>Filter by category</h4>
 						<ul>
-							<CategoryCheckbox categories={categories}
+							<CheckBox categories={categories}
 								handleFilters={filters =>
 									handleFilters(filters, 'category')} />
 						</ul>
@@ -187,7 +187,7 @@ const Shop = () => {
 					<div>
 						<h4>Filter by subcategory</h4>
 						<ul>
-							<SubCategoryCheckbox sub_categories={sub_categories}
+							<CheckBox categories={sub_categories}
 								handleFilters={filters =>
 									handleFilters(filters, 'sub_category')} />
 						</ul>					
@@ -196,7 +196,7 @@ const Shop = () => {
 					<div>
 						<h4>Filter by type</h4>
 						<ul>
-							<TypeCheckbox sub_sub_categories={sub_sub_categories}
+							<CheckBox categories={sub_sub_categories}
 								handleFilters={filters =>
 									handleFilters(filters, 'sub_sub_category')} />
 						</ul>					

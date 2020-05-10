@@ -54,9 +54,39 @@ jumbotron effects
     }
 }
 
-/**
-border radius
-*/
+/**** Custom styles for noUiSlider ****/
+
+.noUi-horizontal .noUi-connect {
+	background: #007bff;
+}
+.noUi-horizontal .noUi-handle, .noUi-vertical .noUi-handle {
+	background: #007bff;
+	width: 1px;
+	height: 1px;
+	left: 6px;
+	top: 1px;
+	border: 2px solid transparent;
+}
+.noUi-target.noUi-horizontal .noUi-tooltip {
+	background-color: transparent ;
+	border: transparent;
+    display: none;
+}
+
+.noUi-target.noUi-horizontal .noUi-active .noUi-tooltip {
+    display: block;
+}
+
+.noUi-target {
+    padding: 0 1px;
+	left: 10px;
+}
+.noUi-connects {
+    margin: 0 -1px;
+    width: calc(1% + 34px);
+}
+
+
 .btn,
 .jumbotron,
 .nav :hover {

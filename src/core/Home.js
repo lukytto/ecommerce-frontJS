@@ -36,7 +36,8 @@ const Home = () => {
     }, []);
 
     return (
-        <Layout title='Home Page' description='Node React ecommerce' className='container'>
+        <Layout title='Home Page' description='Eptica eShop' className='container'>
+
             <Search />
             <h2 className='mb-4'>New Arrivals</h2>
             <div className='row'>

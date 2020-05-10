@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../core/Layout';
 import { isAuthenticated } from '../auth';
 import { Link } from 'react-router-dom';
-import { createProduct, getCategories } from './apiAdmin';
+import { createProduct, getCategories, getSub_categories, getSub_sub_categories } from './apiAdmin';
 
 const AddProduct = () => {
-
 
     const [values, setValues] = useState({
         name: '',
@@ -13,6 +12,11 @@ const AddProduct = () => {
         price: '',
         categories: [],
         category: '',
+        sub_categories: [],
+        sub_category: '',
+        sub_sub_categories: [],
+        sub_sub_category: '',
+		"parameters.thickness": '',
         shipping: '',
         quantity: '',
         photo: '',
@@ -25,6 +29,7 @@ const AddProduct = () => {
     });
 
     const { user, token } = isAuthenticated();
+	const thickness = values["parameters.thickness"];
 
     const {
         name,
@@ -32,6 +37,10 @@ const AddProduct = () => {
         price,
         categories,
         category,
+        sub_categories,
+        sub_category,
+        sub_sub_categories,
+        sub_sub_category,
         shipping,
         quantity,
         loading,
@@ -41,15 +50,34 @@ const AddProduct = () => {
         formData
     } = values;
 
-    // load categories and set form data
     const init = () => {
-        getCategories().then(data => {
+		
+		let sub_categories;
+		let sub_sub_categories;
+		getCategories().then(data => {
             if (data.error) {
-                setValues({ ...values, error: data.error });
+				setValues({...values,error: data.error, formData: new FormData()  });
             } else {
-                setValues({ ...values, categories: data, formData: new FormData() });
+                setValues({...values,categories: data, sub_categories: sub_categories ,sub_sub_categories: sub_sub_categories , formData: new FormData() });
             }
-        });
+        })
+		.then(getSub_categories().then(data => {
+            if (data.error) {
+                setValues({...values,error: data.error, formData: new FormData()  });
+            } else {
+				setValues({formData: new FormData()});
+				sub_categories = data;
+            }
+        }))
+		.then(getSub_sub_categories().then(data => {
+            if (data.error) {
+                setValues({...values,error: data.error, formData: new FormData()  });
+            } else {
+				setValues({formData: new FormData()});
+				sub_sub_categories = data;
+            }
+        }));
+		
     };
 
     useEffect(() => {
@@ -103,17 +131,44 @@ const AddProduct = () => {
                 <textarea onChange={handleChange('description')} className='form-control' value={description}></textarea>
             </div>
 
-            <div className='form-group'>
+            <div id = 'price' className='form-group'>
                 <label className='text-muted'>Price</label>
                 <input onChange={handleChange('price')} type='number' className='form-control' value={price}></input>
+				
             </div>
-
+			
             <div className='form-group'>
                 <label className='text-muted'>Category</label>
                 <select onChange={handleChange('category')}
                     className='form-control' >
                     <option>Please select</option>
                     {categories && categories.map((c, i) => (
+                        <option key={i} value={c._id}>
+                            {c.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
+			
+            <div className='form-group'>
+                <label className='text-muted'>Sub_category</label>
+                <select onChange={handleChange('sub_category')}
+                    className='form-control' >
+                    <option>Please select</option>
+                    {sub_categories && sub_categories.map((c, i) => (
+                        <option key={i} value={c._id}>
+                            {c.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
+			
+            <div className='form-group'>
+                <label className='text-muted'>Sub_sub_category</label>
+                <select onChange={handleChange('sub_sub_category')}
+                    className='form-control' >
+                    <option>Please select</option>
+                    {sub_sub_categories && sub_sub_categories.map((c, i) => (
                         <option key={i} value={c._id}>
                             {c.name}
                         </option>
@@ -130,6 +185,11 @@ const AddProduct = () => {
                     <option value='1'>Yes</option>
                 </select>
             </div>
+			
+            <div className='form-group'>
+                <label className='text-muted'>Thickness</label>
+                <input onChange={handleChange('parameters.thickness')} type='number' className='form-control' value={thickness}></input>
+            </div>			
 
             <div className='form-group'>
                 <label className='text-muted'>Quantity</label>
@@ -141,7 +201,7 @@ const AddProduct = () => {
             </button>
         </form>
     );
-
+	
     const showError = () => (
         <div className='alert alert-danger' style={{ display: error ? '' : 'none' }}>
             {error}
@@ -161,10 +221,18 @@ const AddProduct = () => {
             </div>)
     );
 
+	//	if(document.getElementById('priceee') != null)
+
+					
+	
+	
+	
+	
+
     return (
         <Layout title='Add a new product'
             description={`Hi ${user.name}!, ready to add a new product?`}>
-            <div className='row'>
+            <div id= 'test' className='row'>
                 <div className='col-md-8 offset-md-2'>
                     {showLoading()}
                     {showSuccess()}

@@ -14,7 +14,7 @@ const isActive = (history, path) => {
 const Menu = ({ history }) => (
 
     <div>
-        <ul className='nav nav-tabs bg-primary' style={{backgroundColor: "red"}}>
+        <ul className='nav nav-tabs bg-success' style={{backgroundColor: "red"}}>
             <li className='nav-item'>
                 <Link className='nav-link' style={isActive(history, '/')} to='/'>Home</Link>
             </li>

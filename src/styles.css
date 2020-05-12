@@ -5,7 +5,8 @@ jumbotron effects
     width: 30wh;
     height: 20vh;
     color: #fff;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+   /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);*/
+    background: linear-gradient(to right, #99ff99 0%, #003300 112%);
     background-size: 400% 400%;
     -webkit-animation: Gradient 15s ease infinite;
     -moz-animation: Gradient 15s ease infinite;
@@ -57,10 +58,10 @@ jumbotron effects
 /**** Custom styles for noUiSlider ****/
 
 .noUi-horizontal .noUi-connect {
-	background: #007bff;
+	background: #5cb85c ; /*007bff*/
 }
 .noUi-horizontal .noUi-handle, .noUi-vertical .noUi-handle {
-	background: #007bff;
+	background: #5cb85c;
 	width: 1px;
 	height: 1px;
 	left: 6px;
@@ -159,7 +160,7 @@ card table styles
 single product page - product name
 */
 .name {
-    background: #007bff;
+    background: #5cb85c;
     color: #fff;
     font-weight: bold;
 }

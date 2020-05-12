@@ -86,6 +86,35 @@ jumbotron effects
     width: calc(1% + 34px);
 }
 
+/*
+card table styles
+*/
+.table-1 {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.td-1 {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+.td-2 {
+	display: none;
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+.tr-1:nth-child(even) {
+	background-color: #dddddd;
+}
+
+.tr-2:nth-child(even) {
+	display: none;
+	background-color: #dddddd;
+}
 
 .btn,
 .jumbotron,

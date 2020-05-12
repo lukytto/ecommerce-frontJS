@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../core/Layout';
 import { isAuthenticated } from '../auth';
-import { Link } from 'react-router-dom';
-import { createProduct, getCategories, getSub_categories, getSub_sub_categories } from './apiAdmin';
+//import { Link } from 'react-router-dom';
+import { createProduct, getCategories, getSub_categories, getSub_sub_categories, getSuppliers } from './apiAdmin';
 
 const AddProduct = () => {
 
@@ -16,6 +16,8 @@ const AddProduct = () => {
         sub_category: '',
         sub_sub_categories: [],
         sub_sub_category: '',
+        suppliers: [],
+        supplier: '',
 		"parameters.thickness": '',
         shipping: '',
         quantity: '',
@@ -23,7 +25,7 @@ const AddProduct = () => {
         loading: false,
         error: '',
         createProduct: '',
-        redirectToProfile: false,
+        //redirectToProfile: false,
         formData: ''
 
     });
@@ -36,29 +38,54 @@ const AddProduct = () => {
         description,
         price,
         categories,
-        category,
+        //category,
         sub_categories,
-        sub_category,
+        //sub_category,
         sub_sub_categories,
-        sub_sub_category,
-        shipping,
+        //sub_sub_category,
+        suppliers,
+        //supplier,
+        //shipping,
         quantity,
         loading,
         error,
         createdProduct,
-        redirectToProfile,
+        //redirectToProfile,
         formData
     } = values;
+	
+	/*
+	function Example({ someProp }) {
+		function doSomething() {
+			console.log(someProp);  }
 
+		useEffect(() => {
+			doSomething();
+		}, []); // REEED This is not safe (it calls `doSomething` which uses `someProp`)}
+	}
+	/////////////
+	
+	function Example({ someProp }) {
+		useEffect(() => {
+			function doSomething() {
+				console.log(someProp);    }
+
+		doSomething();
+		}, [someProp]); // ✅ OK (our effect only uses `someProp`)}
+	}
+  //////////////////
+  */
+  
     const init = () => {
 		
 		let sub_categories;
 		let sub_sub_categories;
+		let suppliers;
 		getCategories().then(data => {
             if (data.error) {
 				setValues({...values,error: data.error, formData: new FormData()  });
             } else {
-                setValues({...values,categories: data, sub_categories: sub_categories ,sub_sub_categories: sub_sub_categories , formData: new FormData() });
+                setValues({...values, categories: data, sub_categories: sub_categories, sub_sub_categories: sub_sub_categories, suppliers: suppliers, formData: new FormData() });
             }
         })
 		.then(getSub_categories().then(data => {
@@ -75,6 +102,14 @@ const AddProduct = () => {
             } else {
 				setValues({formData: new FormData()});
 				sub_sub_categories = data;
+            }
+        }))
+		.then(getSuppliers().then(data => {
+            if (data.error) {
+                setValues({...values,error: data.error, formData: new FormData()  });
+            } else {
+				setValues({formData: new FormData()});
+				suppliers = data;
             }
         }));
 		
@@ -134,7 +169,11 @@ const AddProduct = () => {
             <div id = 'price' className='form-group'>
                 <label className='text-muted'>Price</label>
                 <input onChange={handleChange('price')} type='number' className='form-control' value={price}></input>
-				
+            </div>
+			
+            <div className='form-group'>
+                <label className='text-muted'>Thickness</label>
+                <input onChange={handleChange('parameters.thickness')} type='number' className='form-control' value={thickness}></input>
             </div>
 			
             <div className='form-group'>
@@ -175,6 +214,19 @@ const AddProduct = () => {
                     ))}
                 </select>
             </div>
+			
+            <div className='form-group'>
+                <label className='text-muted'>Supplier</label>
+                <select onChange={handleChange('supplier')}
+                    className='form-control' >
+                    <option>Please select</option>
+                    {suppliers && suppliers.map((c, i) => (
+                        <option key={i} value={c._id}>
+                            {c.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
 
             <div className='form-group'>
                 <label className='text-muted'>Shipping</label>
@@ -186,11 +238,6 @@ const AddProduct = () => {
                 </select>
             </div>
 			
-            <div className='form-group'>
-                <label className='text-muted'>Thickness</label>
-                <input onChange={handleChange('parameters.thickness')} type='number' className='form-control' value={thickness}></input>
-            </div>			
-
             <div className='form-group'>
                 <label className='text-muted'>Quantity</label>
                 <input onChange={handleChange('quantity')} type='number' className='form-control' value={quantity}></input>
@@ -220,14 +267,6 @@ const AddProduct = () => {
                 <h2>Loading...</h2>
             </div>)
     );
-
-	//	if(document.getElementById('priceee') != null)
-
-					
-	
-	
-	
-	
 
     return (
         <Layout title='Add a new product'

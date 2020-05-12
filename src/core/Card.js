@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import ShowImage from './ShowImage';
-import moment from 'moment';
+import { Link } from 'react-router-dom'; //import { Link, Redirect } from 'react-router-dom'; 
+import { ShowImage, ShowLogo} from './ShowImage';
+//import moment from 'moment';
 
 const fields = ['category', 'sub_category', 'sub_sub_category', 'quantity', 'price', 'parameters.substrate', 'parameters.ar_coating_type',
 'parameters.ar_coating_min_thickness', 'parameters.ar_coating_max_thickness', 'parameters.surface_quality', 'parameters.reflectance', 'parameters.reflectance_min_range',
@@ -36,8 +36,7 @@ const Card = ({ product, showViewProductButton = true, showExpandedInfo = false 
     };
 	
 	const hideNullFields = () => {
-		//
-			//	{hideNullFields()}
+		
 		fields.forEach(function (item) {
 			if (product[item] != null) {
 				let elementId = product + item;
@@ -57,6 +56,10 @@ const Card = ({ product, showViewProductButton = true, showExpandedInfo = false 
 					<tr className='tr-1' id={product._id + 'price'}>
 						<td className='td-1' >Price</td>
 						<td className='td-1'>€{product.price}</td>
+					</tr>
+					<tr className='tr-1' id={product + 'supplier'}>
+						<td className='td-1'>Supplier</td>
+						<td className='td-1'>{product.supplier && product.supplier.name}</td>
 					</tr>
 					<tr className='tr-1' id={product + 'category'}>
 						<td className='td-1'>Category</td>
@@ -81,81 +84,55 @@ const Card = ({ product, showViewProductButton = true, showExpandedInfo = false 
 						<td className='td-1'>{product.parameters.substrate}</td>
 					</tr>
 					<tr className='tr-1' id={product + 'parameters.ar_coating_type'}>
-						<td className='td-1'>Ar Coating Type</td>
-						<td className='td-1'>{product.parameters.ar_coating_type}</td>
-					</tr>
-					
-					<tr className='tr-1' id={product + 'parameters.ar_coating_min_thickness'}>
-						<td className='td-1'>ar_coating_min_thickness</td>
-						<td className='td-1'>{product.parameters.ar_coating_min_thickness}</td>
-					</tr>
-					<tr className='tr-1' id={product + 'parameters.ar_coating_max_thickness'}>
-						<td className='td-1'>ar_coating_min_thickness</td>
-						<td className='td-1'>{product.parameters.ar_coating_max_thickness}</td>
+						<td className='td-1'>Ar Coating</td>
+						<td className='td-1'>{product.parameters.ar_coating_type} ({product.parameters.ar_coating_min_thickness} - {product.parameters.ar_coating_max_thickness} nm) </td>
 					</tr>
 					
 					<tr className='tr-1' id={product + 'parameters.surface_quality'}>
-						<td className='td-1'>surface_quality</td>
+						<td className='td-1'>Surface Quality</td>
 						<td className='td-1'>{product.parameters.surface_quality}</td>
 					</tr>
 					<tr className='tr-1' id={product + 'parameters.reflectance'}>
-						<td className='td-1'>reflectance</td>
-						<td className='td-1'>{product.parameters.reflectance}</td>
-					</tr>
-					<tr className='tr-1' id={product + 'parameters.reflectance_min_range'}>
-						<td className='td-1'>reflectance_min_range</td>
-						<td className='td-1'>{product.parameters.reflectance_min_range}</td>
-					</tr>
-					<tr className='tr-1' id={product + 'parameters.reflectance_max_range'}>
-						<td className='td-1'>reflectance_max_range</td>
-						<td className='td-1'>{product.parameters.reflectance_max_range}</td>
-					</tr>
-					
+						<td className='td-1'>Reflectance</td>
+						<td className='td-1'> R&lt; {product.parameters.reflectance}% ({product.parameters.reflectance_max_range} - {product.parameters.reflectance_min_range} nm)</td>
+					</tr>					
 					<tr className='tr-1' id={product + 'parameters.clear_aperture'}>
-						<td className='td-1'>clear_aperture</td>
-						<td className='td-1'>{product.parameters.clear_aperture}</td>
+						<td className='td-1'>Clear Aperture</td>
+						<td className='td-1'>{product.parameters.clear_aperture}%</td>
 					</tr>
 					<tr className='tr-1' id={product + 'parameters.surface_flatness'}>
-						<td className='td-1'>surface_flatness</td>
-						<td className='td-1'>{product.parameters.surface_flatness}</td>
+						<td className='td-1'>Surface Flatness</td>
+						<td className='td-1'>&#x03bb;/{product.parameters.surface_flatness}</td>
 					</tr>
 					
 					<tr className='tr-1' id={product + 'parameters.wedge_angle'}>
-						<td className='td-1'>wedge_angle</td>
+						<td className='td-1'>Wedge Angle</td>
 						<td className='td-1'>{product.parameters.wedge_angle}</td>
-					</tr>
-					<tr className='tr-1' id={product + 'parameters.reflectance_max_range'}>
-						<td className='td-1'>reflectance_max_range</td>
-						<td className='td-1'>{product.parameters.reflectance_max_range}</td>
 					</tr>
 					
 					<tr className='tr-1' id={product + 'parameters.parallelism'}>
-						<td className='td-1'>parallelism</td>
-						<td className='td-1'>{product.parameters.parallelism}</td>
+						<td className='td-1'>Parallelism</td>
+						<td className='td-1'>&#x2264;{product.parameters.parallelism}'</td>
 					</tr>
 					<tr className='tr-1' id={product + 'parameters.shape'}>
-						<td className='td-1'>shape</td>
+						<td className='td-1'>Shape</td>
 						<td className='td-1'>{product.parameters.shape}</td>
 					</tr>
 					<tr className='tr-1' id={product + 'parameters.thickness'}>
-						<td className='td-1'>thickness</td>
-						<td className='td-1'>{product.parameters.thickness}</td>
+						<td className='td-1'>Thickness</td>
+						<td className='td-1'>{product.parameters.thickness}mm</td>
 					</tr>
 					<tr className='tr-1' id={product + 'parameters.surface_area'}>
-						<td className='td-1'>surface_area</td>
+						<td className='td-1'>Surface Area</td>
 						<td className='td-1'>{product.parameters.surface_area}mm^2</td>
 					</tr>
 					<tr className='tr-1' id={product + 'parameters.diameter'}>
-						<td className='td-1'>diameter</td>
-						<td className='td-1'>{product.parameters.diameter}mm</td>
+						<td className='td-1'>Dimensions</td>
+						<td className='td-1'>&#x2300; {product.parameters.diameter}mm</td>
 					</tr>
 					<tr className='tr-1' id={product + 'parameters.length'}>
-						<td className='td-1'>length</td>
-						<td className='td-1'>{product.parameters.length}mm</td>
-					</tr>
-					<tr className='tr-1' id={product + 'parameters.width'}>
-						<td className='td-1'>width</td>
-						<td className='td-1'>{product.parameters.width}mm</td>
+						<td className='td-1'>Dimensions</td>
+						<td className='td-1'>{product.parameters.length} x {product.parameters.width}mm</td>
 					</tr>
 				</table> 
             );
@@ -175,37 +152,24 @@ const Card = ({ product, showViewProductButton = true, showExpandedInfo = false 
 		}
 		
     };
-	/*
-'parameters.ar_coating_min_thickness', 'parameters.ar_coating_max_thickness', 'parameters.surface_quality', 'parameters.reflectance', 'parameters.reflectance_min_range',
-'parameters.reflectance_max_range', 'parameters.clear_aperture', 'parameters.surface_flatness', 'parameters.wedge_angle', 'parameters.parallelism', 'parameters.shape',
-'parameters.thickness', 'parameters.surface_area', 'parameters.diameter', 'parameters.length', 'parameters.width'];
-	const fields = ['category', 'sub_category', 'sub_sub_category', 'quantity', 'price', 
 
-
-		
-			
-                <p id='quantity'>
-					Quantity {product.quantity}</p>
-                <p id='sub_category'>
-                    Subcategory: {product.sub_category
-                        && product.sub_category.name}</p>
-                <p id='sub_sub_category'>
-                    Type: {product.sub_sub_category
-                        && product.sub_sub_category.name}</p>
-                <p id='parameters.substrate'>
-					Substrate: {product['parameters.substrate']}</p>
-                <p id='parameters.ar_coating_type'>
-					Ar Coating Type: {product['parameters.ar_coating_type']}</p>
-*/
-
+	//         <ShowImage item={product.supplier} url='supplier' />
     return (
 
-        <div className='card'>
+        <div className='card' >
             <div className='card-header name'>{product.name}</div>
             <div className='card-body'>
-                <ShowImage item={product} url='product' />
+				<div className="image-stack">
+					<div className="image-stack__item--bottom">
+						<ShowImage item={product} url='product' />
+					</div>
+					<div className="image-stack__item--top">
+						<ShowLogo item={product.supplier} url='supplier' />
+					</div>
+					
+				</div>
+       
                 <p className='lead mt-2' id={product + 'description'}>{product.description.substring(0, 100)}</p>
-
                
 				{showDetailedInfo(showExpandedInfo)}
 				

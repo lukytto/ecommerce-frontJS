@@ -5,9 +5,6 @@ import {getCategories, getSub_categories, getSub_sub_categories, getFilteredProd
 import CheckBox from './Checkbox';
 import {createPriceSlider, createThicknessSlider} from './Sliders';
 
-import noUiSlider from 'nouislider';
-import "nouislider/distribute/nouislider.css";
-import wNumb from 'wnumb';
 
 const Shop = () => {
     const [myFilters, setMyFilters] = useState({
@@ -17,7 +14,7 @@ const Shop = () => {
     const [sub_categories, setSub_categories] = useState([]);
     const [sub_sub_categories, setSub_sub_categories] = useState([]);
     const [error, setError] = useState(false);
-    const [limit, setLimit] = useState(6);
+    const [limit] = useState(6); //const [limit, setLimit] = useState(6);
     const [skip, setSkip] = useState(0);
     const [size, setSize] = useState(0);
     const [filteredResults, setFilteredResults] = useState([]);
@@ -116,7 +113,7 @@ const Shop = () => {
 			let min = priceSlider.noUiSlider.options.range.min;
 			let max = priceSlider.noUiSlider.options.range.max;
 			
-			if(values[0] == min && values[1] == max) {
+			if(values[0] === min && values[1] === max) {
 				handleFilters([],'price');
 			} 	else {
 				handleFilters(values,'price');
@@ -133,7 +130,7 @@ const Shop = () => {
 			let min = thicknessSlider.noUiSlider.options.range.min;
 			let max = thicknessSlider.noUiSlider.options.range.max;
 			
-			if(values[0] == min && values[1] == max) {
+			if(values[0] === min && values[1] === max) {
 				handleFilters([],'parameters.thickness');
 			} else {
 				handleFilters(values,'parameters.thickness');

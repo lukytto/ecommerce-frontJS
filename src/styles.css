@@ -116,6 +116,39 @@ card table styles
 	background-color: #dddddd;
 }
 
+/*
+	card images
+*/
+.image-stack {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	position: relative;
+}
+
+
+.image-stack__item--bottom {
+	
+	grid-row: 1; /* make this image be on the same row */
+	z-index: 0; /* make this image render on top of the bottom */
+}
+
+.image-stack__item--top {
+	
+	grid-column: 1 / span 8;
+	grid-row: 1; /* must be on the same row as the other image */
+	padding-top: 10%;
+	/* padding-top: 20%;  this pushes the image down, and keeps it proportional as it resizes */
+	z-index: 1; /* make this image render on top of the bottom */
+}
+
+/*
+
+	grid-column: 4 / -1;
+	grid-row: 1; /* make this image be on the same row */
+/*
+*/
+
+
 .btn,
 .jumbotron,
 .nav :hover {

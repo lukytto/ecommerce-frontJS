@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import ShowImage from './ShowImage';
 import moment from 'moment';
+import { addItem, updateItem, removeItem } from './cartHelpers';
 
-const Card = ({ product, showViewProductButton = true, showExpandedInfo = false }) => {
+
+const Card = ({
+    product,
+    showViewProductButton = true,
+    showAddToCartButton = true,
+    cartUpdate = false,
+    showRemoveProductButton = false,
+    showExpandedInfo = false,
+    setRun = f => f,
+    run = undefined
+    // changeCartSize
+}) => {
+
+    const [redirect, setRedirect] = useState(false);
+    const [count, setCount] = useState(product.count);
 
     const showViewButton = showViewProductButton => {
         return (
@@ -14,78 +29,129 @@ const Card = ({ product, showViewProductButton = true, showExpandedInfo = false 
             )
         );
     };
-
-    const showAddToCartButton = () => {
-        return (
-            <button className='btn btn-outline-warning mt-2 mb-2'>
-                Add to cart
-            </button>
-        );
+    const addToCart = () => {
+        // console.log('added');
+        addItem(product, setRedirect(true));
     };
 
-    const showStock = (quantity) => {
-        return quantity > 0 ?
-            <span className='badge badge-primary badge-pill' >In Stock</span>
-            :
-            <span className='badge badge-primary badge-pill' >Out of Stock</span>;
+    const shouldRedirect = redirect => {
+        if (redirect) {
+            return <Redirect to="/cart" />;
+        }
     };
-	//padaryk, kad rodytu tik tada parametrus, kai jie nera null
-	const showDetailedInfo = showExpandedInfo => {
+
+    const showAddToCartBtn = showAddToCartButton => {
         return (
-            showExpandedInfo && (
-			<div >
-                <p className='black-8' id='subcategory'>
-                    Sub Category: {product.sub_category
-                        && product.sub_category.name}</p>
-                <p className='black-7'>
-                    Type: {product.sub_sub_category
-                        && product.sub_sub_category.name}</p>
-						
-                <p className='black-6'>
-					Quantity {product.quantity}</p>
-            </div>
+            showAddToCartButton && (
+                <button onClick={addToCart} className="btn btn-outline-warning mt-2 mb-2 card-btn-1  ">
+                    Add to cart
+                </button>
             )
         );
     };
-		
-	const hideNullFields = () => {
-			//alert(product.sub_category);
-		if(product.category == null)
-		{
-			//alert("category is null");
-		}
-		if(product.sub_category != null)
-		{
-			//alert(product.sub_sub_category.name + " " + product.category.name);
-		}
-	}
+
+    const showStock = quantity => {
+        return quantity > 0 ? (
+            <span className="badge badge-primary badge-pill">In Stock </span>
+        ) : (
+                <span className="badge badge-primary badge-pill">Out of Stock </span>
+            );
+    };
+
+    const handleChange = productId => event => {
+        setRun(!run); // run useEffect in parent Cart
+        setCount(event.target.value < 1 ? 1 : event.target.value);
+        if (event.target.value >= 1) {
+            updateItem(productId, event.target.value);
+        }
+    };
+
+
+    const showCartUpdateOptions = cartUpdate => {
+        return (
+            cartUpdate && (
+                <div>
+                    <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text">Adjust Quantity</span>
+                        </div>
+                        <input type="number" className="form-control" value={count} onChange={handleChange(product._id)} />
+                    </div>
+                </div>
+            )
+        );
+    };
+
+    const showRemoveButton = showRemoveProductButton => {
+        return (
+            showRemoveProductButton && (
+                <button
+                    onClick={() => {
+                        removeItem(product._id);
+                        setRun(!run); // run useEffect in parent Cart
+                    }}
+                    className="btn btn-outline-danger mt-2 mb-2"
+                >
+                    Remove Product
+                </button>
+            )
+        );
+    };
+
+    // //padaryk, kad rodytu tik tada parametrus, kai jie nera null
+    // const showDetailedInfo = showExpandedInfo => {
+    //     return (
+    //         showExpandedInfo && (
+    //             <div >
+    //                 <p className='black-8' id='subcategory'>
+    //                     Sub Category: {product.sub_category
+    //                         && product.sub_category.name}</p>
+    //                 <p className='black-7'>
+    //                     Type: {product.sub_sub_category
+    //                         && product.sub_sub_category.name}</p>
+
+    //                 <p className='black-6'>
+    //                     Quantity {product.quantity}</p>
+    //             </div>
+    //         )
+    //     );
+    // };
+
+    // const hideNullFields = () => {
+    //     //alert(product.sub_category);
+    //     if (product.category == null) {
+    //         //alert("category is null");
+    //     }
+    //     if (product.sub_category != null) {
+    //         //alert(product.sub_sub_category.name + " " + product.category.name);
+    //     }
+    // };
+
 
     return (
-
-        <div className='card'>
-            <div className='card-header name'>{product.name}</div>
-            <div className='card-body'>
-                <ShowImage item={product} url='product' />
-                <p className='lead mt-2'>{product.description.substring(0, 100)}</p>
-                <p className='black-10'>€{product.price}</p>
-                <p className='black-9'>
-                    Category: {product.category
-                        && product.category.name}</p>
-				{showDetailedInfo(showExpandedInfo)}
-				{hideNullFields()}
-				
+        <div className="card ">
+            <div className="card-header card-header-1 ">{product.name}</div>
+            <div className="card-body">
+                {shouldRedirect(redirect)}
+                <ShowImage item={product} url="product" />
+                <p className="card-p  mt-2">{product.description.substring(0, 100)} </p>
+                <p className="card-p black-10">$ {product.price}</p>
+                <p className="black-9">Category: {product.category && product.category.name}</p>
+                <p className="black-8">Added on {moment(product.createdAt).fromNow()}</p>
                 {showStock(product.quantity)}
                 <br />
+                {/* {showDetailedInfo(showExpandedInfo)}
+                {hideNullFields()} */}
 
                 {showViewButton(showViewProductButton)}
 
-                {showAddToCartButton()}
+                {showAddToCartBtn(showAddToCartButton)}
 
+                {showRemoveButton(showRemoveProductButton)}
 
+                {showCartUpdateOptions(cartUpdate)}
             </div>
-
         </div>
-
     );
 };
 

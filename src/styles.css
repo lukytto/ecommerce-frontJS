@@ -57,19 +57,22 @@ jumbotron effects
 /**** Custom styles for noUiSlider ****/
 
 .noUi-horizontal .noUi-connect {
-	background: #007bff;
+    background: #007bff;
 }
-.noUi-horizontal .noUi-handle, .noUi-vertical .noUi-handle {
-	background: #007bff;
-	width: 1px;
-	height: 1px;
-	left: 6px;
-	top: 1px;
-	border: 2px solid transparent;
+
+.noUi-horizontal .noUi-handle,
+.noUi-vertical .noUi-handle {
+    background: #007bff5e;
+    width: 1px;
+    height: 1px;
+    left: 6px;
+    top: 1px;
+    border: 2px solid transparent;
 }
+
 .noUi-target.noUi-horizontal .noUi-tooltip {
-	background-color: transparent ;
-	border: transparent;
+    background-color: transparent;
+    border: transparent;
     display: none;
 }
 
@@ -79,8 +82,9 @@ jumbotron effects
 
 .noUi-target {
     padding: 0 1px;
-	left: 10px;
+    left: 10px;
 }
+
 .noUi-connects {
     margin: 0 -1px;
     width: calc(1% + 34px);
@@ -91,6 +95,18 @@ jumbotron effects
 .jumbotron,
 .nav :hover {
     border-radius: 0px;
+}
+
+/*
+cart badge
+*/
+.cart-badge,
+.cart-badge:hover {
+    border-radius: 50%;
+    padding: 2px;
+    font-size: 12px;
+    font-style: italic;
+    background: #007bff;
 }
 
 /*  

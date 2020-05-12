@@ -1,14 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; //import { Link, Redirect } from 'react-router-dom'; 
+import React, { useState } from 'react';
+import { Link, Redirect  } from 'react-router-dom'; //import { Link, Redirect } from 'react-router-dom'; 
 import { ShowImage, ShowLogo} from './ShowImage';
+import moment from 'moment';
+import { addItem, updateItem, removeItem } from './cartHelpers';
 //import moment from 'moment';
+
 
 const fields = ['category', 'sub_category', 'sub_sub_category', 'quantity', 'price', 'parameters.substrate', 'parameters.ar_coating_type',
 'parameters.ar_coating_min_thickness', 'parameters.ar_coating_max_thickness', 'parameters.surface_quality', 'parameters.reflectance', 'parameters.reflectance_min_range',
 'parameters.reflectance_max_range', 'parameters.clear_aperture', 'parameters.surface_flatness', 'parameters.wedge_angle', 'parameters.parallelism', 'parameters.shape',
 'parameters.thickness', 'parameters.surface_area', 'parameters.diameter', 'parameters.length', 'parameters.width'];
 
-const Card = ({ product, showViewProductButton = true, showExpandedInfo = false }) => {
+const Card = ({
+    product,
+    showViewProductButton = true,
+    showAddToCartButton = true,
+    cartUpdate = false,
+    showRemoveProductButton = false,
+    showExpandedInfo = false,
+    setRun = f => f,
+    run = undefined
+    // changeCartSize
+}) => {
+
+    const [redirect, setRedirect] = useState(false);
+    const [count, setCount] = useState(product.count);
 
     const showViewButton = showViewProductButton => {
         return (
@@ -19,20 +35,80 @@ const Card = ({ product, showViewProductButton = true, showExpandedInfo = false 
             )
         );
     };
-
-    const showAddToCartButton = () => {
-        return (
-            <button className='btn btn-outline-danger mt-2 mb-2'>
-                Add to cart
-            </button>
-        );
+    const addToCart = () => {
+        // console.log('added');
+        addItem(product, setRedirect(true));
     };
 
-    const showStock = (quantity) => {
-        return quantity > 0 ?
+    const shouldRedirect = redirect => {
+        if (redirect) {
+            return <Redirect to="/cart" />;
+        }
+    };
+	
+	const showAddToCartBtn = showAddToCartButton => {
+        return (
+            showAddToCartButton && (
+                <button onClick={addToCart} className="btn btn-outline-warning mt-2 mb-2 card-btn-1  ">
+                    Add to cart
+                </button>
+            )
+        );
+    };
+	
+    const showStock = quantity => {
+        return quantity > 0 ? (
+            <span className="badge badge-success badge-pill">In Stock </span>
+        ) : (
+                <span className="badge badge-success badge-pill">Out of Stock </span>
+            );
+    };
+	
+	/*
+	
             <span className='badge badge-success' >In Stock</span>
             :
             <span className='badge badge-success' >Out of Stock</span>;
+	*/
+	
+	const handleChange = productId => event => {
+        setRun(!run); // run useEffect in parent Cart
+        setCount(event.target.value < 1 ? 1 : event.target.value);
+        if (event.target.value >= 1) {
+            updateItem(productId, event.target.value);
+        }
+    };
+
+
+    const showCartUpdateOptions = cartUpdate => {
+        return (
+            cartUpdate && (
+                <div>
+                    <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text">Adjust Quantity</span>
+                        </div>
+                        <input type="number" className="form-control" value={count} onChange={handleChange(product._id)} />
+                    </div>
+                </div>
+            )
+        );
+    };
+
+    const showRemoveButton = showRemoveProductButton => {
+        return (
+            showRemoveProductButton && (
+                <button
+                    onClick={() => {
+                        removeItem(product._id);
+                        setRun(!run); // run useEffect in parent Cart
+                    }}
+                    className="btn btn-outline-danger mt-2 mb-2"
+                >
+                    Remove Product
+                </button>
+            )
+        );
     };
 	
 	const hideNullFields = () => {
@@ -152,13 +228,13 @@ const Card = ({ product, showViewProductButton = true, showExpandedInfo = false 
 		}
 		
     };
-
-	//         <ShowImage item={product.supplier} url='supplier' />
+	
     return (
 
         <div className='card' >
             <div className='card-header name'>{product.name}</div>
             <div className='card-body'>
+                {shouldRedirect(redirect)}
 				<div className="image-stack">
 					<div className="image-stack__item--bottom">
 						<ShowImage item={product} url='product' />
@@ -180,13 +256,13 @@ const Card = ({ product, showViewProductButton = true, showExpandedInfo = false 
 
                 {showViewButton(showViewProductButton)}
 
-                {showAddToCartButton()}
+                {showAddToCartBtn(showAddToCartButton)}
 
+                {showRemoveButton(showRemoveProductButton)}
 
+                {showCartUpdateOptions(cartUpdate)}
             </div>
-
         </div>
-
     );
 };
 

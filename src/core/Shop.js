@@ -14,7 +14,7 @@ const Shop = () => {
     const [sub_categories, setSub_categories] = useState([]);
     const [sub_sub_categories, setSub_sub_categories] = useState([]);
     const [error, setError] = useState(false);
-    const [limit] = useState(6); //const [limit, setLimit] = useState(6);
+    const [limit] = useState(16); //const [limit, setLimit] = useState(6);
     const [skip, setSkip] = useState(0);
     const [size, setSize] = useState(0);
     const [filteredResults, setFilteredResults] = useState([]);
@@ -83,7 +83,7 @@ const Shop = () => {
         return (
             size > 0 &&
             size >= limit && (
-                <button onClick={loadMore} className="btn btn-warning mb-5">
+                <button onClick={loadMore} className="btn btn-primary mb-5">
                     Load more
                 </button>
             )
@@ -149,10 +149,11 @@ const Shop = () => {
     return (
         <Layout title='Shop Page'
             description='Search and find optical components of your choice'
-            className='container-fluid'>
+            className='shop-container'
+			>
 
             <div className='row'>
-                <div className='col-2'>			
+                <div className='col-lg-2 col-md-2 col-sm-12 col-xs-12'>			
 				
 					<div >
 						<h4>Filter by price</h4>
@@ -207,7 +208,7 @@ const Shop = () => {
 					
                         {filteredResults.map((product, i) => (
 
-                            <div key={i} className='col-4 mb-4'>
+                            <div key={i} className='col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-2'>
                                 <Card product={product} />
                             </div>
 

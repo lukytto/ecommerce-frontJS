@@ -5,8 +5,7 @@ jumbotron effects
     width: 30wh;
     height: 20vh;
     color: #fff;
-   /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);*/
-    background: linear-gradient(to right, #99ff99 0%, #003300 112%);
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
     background-size: 400% 400%;
     -webkit-animation: Gradient 15s ease infinite;
     -moz-animation: Gradient 15s ease infinite;
@@ -58,10 +57,10 @@ jumbotron effects
 /**** Custom styles for noUiSlider ****/
 
 .noUi-horizontal .noUi-connect {
-	background: #5cb85c ; /*007bff*/
+	background: #007bff ; /*007bff*/
 }
 .noUi-horizontal .noUi-handle, .noUi-vertical .noUi-handle {
-	background: #5cb85c;
+	background: #007bff5e;
 	width: 1px;
 	height: 1px;
 	left: 6px;
@@ -123,6 +122,16 @@ card table styles
 /*
 	card images
 */
+
+.shop-container {
+	max-width: 1600px; 
+	width: 100%;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
 .image-stack {
 	display: grid;
 	grid-template-columns: repeat(12, 1fr);
@@ -168,14 +177,14 @@ cart badge
     padding: 2px;
     font-size: 12px;
     font-style: italic;
-    background: #5cb85c;
+    background: #5bc0de;
 }
 
 /*  
 single product page - product name
 */
 .name {
-    background: #5cb85c;
+    background: #007bff;
     color: #fff;
     font-weight: bold;
 }

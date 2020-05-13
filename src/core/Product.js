@@ -49,7 +49,8 @@ const Product = (props) => {
                         && product.description &&
                         <Card product={product}
                             showViewProductButton={false} 
-							showExpandedInfo={true}/>
+							showExpandedInfo={true}
+							showLargeImage={true}/>
                     }
                 </div>
                 <div className='col-4'>

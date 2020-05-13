@@ -145,6 +145,36 @@ black shade from 10-1
     background: #b3b3b3;
 }
 
+/*
+card table styles
+*/
+.table-1 {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.td-1 {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+.td-2 {
+	display: none;
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+.tr-1:nth-child(even) {
+	background-color: #dddddd;
+}
+
+.tr-2:nth-child(even) {
+	display: none;
+	background-color: #dddddd;
+}
+
 
 /**
 product image on card

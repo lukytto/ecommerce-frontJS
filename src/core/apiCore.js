@@ -43,6 +43,16 @@ export const getSub_sub_categories = () => {
         .catch(err => console.log(err));
 };
 
+export const getSuppliers = () => {
+    return fetch(`${API}/suppliers`, {
+        method: "GET"
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
 export const getFilteredProducts = (skip, limit, filters = {}) => {
 
     const data = {

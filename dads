@@ -1,0 +1,64 @@
+[33mcommit 6d78853f24c18197a089bf8ce2a4e32d4e39c86e[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/arnasbranch[m[33m)[m
+Merge: d61e171 453b77f
+Author: ciliakas <54979455+ciliakas@users.noreply.github.com>
+Date:   Tue May 12 14:47:40 2020 +0300
+
+    merged branches, added cart and expanded card
+
+[33mcommit d61e17183f1064cbdc4c76a325c4ec590dd42f4c[m
+Author: ciliakas <54979455+ciliakas@users.noreply.github.com>
+Date:   Tue May 12 14:25:47 2020 +0300
+
+    changed colour scheme to green
+
+[33mcommit 591f97fc866dfc121b7af5aa0a3f52fd7ab38d0e[m
+Author: ciliakas <54979455+ciliakas@users.noreply.github.com>
+Date:   Tue May 12 14:00:55 2020 +0300
+
+    added supplier logos
+
+[33mcommit 453b77f60107ae44a5959358ccfcf574f0c77072[m
+Author: lukas.kup <lukas.s.kuprys@gmail.com>
+Date:   Tue May 12 13:10:37 2020 +0300
+
+    shopping cart
+
+[33mcommit 4f2ff9c92378f26a6292e4cbacc84de3aef08ef8[m
+Author: ciliakas <54979455+ciliakas@users.noreply.github.com>
+Date:   Tue May 12 07:57:57 2020 +0300
+
+    added extra fields in product display
+
+[33mcommit 7a454cbf302734e7988071d5c08446a58704483c[m
+Author: ciliakas <54979455+ciliakas@users.noreply.github.com>
+Date:   Sun May 10 21:19:41 2020 +0300
+
+    changed faviocn, started working on expanded card
+
+[33mcommit 5ebb2a37107239d08e18d18172d686b3892a0fc4[m
+Merge: e707977 0f2dbbe
+Author: lukytto <40764013+lukytto@users.noreply.github.com>
+Date:   Sun May 10 18:49:31 2020 +0300
+
+    Merge pull request #1 from lukytto/arnasbranch
+    
+    Arnasbranch
+
+[33mcommit 0f2dbbe7bcee671fccfc3f822237790c66105aa6[m
+Author: ciliakas <54979455+ciliakas@users.noreply.github.com>
+Date:   Sun May 10 12:07:06 2020 +0300
+
+    Merged branches
+
+[33mcommit 4e33907af92777087b1765636d27529a36404eca[m
+Merge: fb0fcbb e707977
+Author: ciliakas <54979455+ciliakas@users.noreply.github.com>
+Date:   Sun May 10 07:13:11 2020 +0300
+
+    merging branches
+
+[33mcommit fb0fcbbd9267bc0a434a4c3534dfe0e17168cdf9[m
+Author: ciliakas <54979455+ciliakas@users.noreply.github.com>
+Date:   Tue May 5 13:40:43 2020 +0300
+
+    Arnas Branch. No Ui Slider installed, Sub and sub sub categories from my back end are being used

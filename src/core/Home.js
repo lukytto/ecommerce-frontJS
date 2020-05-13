@@ -42,7 +42,7 @@ const Home = () => {
             <h2 className='mb-4'>New Arrivals</h2>
             <div className='row'>
                 {productsByArrival.map((product, i) => (
-                    <div key={i} className='col-4 mb-4'>
+                    <div key={i} className='col-lg-4 col-md-4 col-sm-12 mb-4'>
                         <Card product={product} />
                     </div>
                 ))}

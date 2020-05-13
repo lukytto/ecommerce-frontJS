@@ -156,9 +156,9 @@ const Shop = () => {
             className='container-fluid'>
 
             <div className='row'>
-                <div className='col-2'>
+                <div className='col-lg-2 col-md-2 col-sm-12 col-xs-12'>
 
-                    <div >
+                    <div>
                         <h4>Filter by price</h4>
                         <br />
                         <div id="priceSlider">
@@ -211,7 +211,7 @@ const Shop = () => {
 
                         {filteredResults.map((product, i) => (
 
-                            <div key={i} className='col-2 mb-2'>
+                            <div key={i} className='col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-2'>
                                 <Card product={product} />
                             </div>
 

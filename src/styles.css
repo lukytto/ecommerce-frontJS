@@ -60,8 +60,7 @@ jumbotron effects
     background: #007bff;
 }
 
-.noUi-horizontal .noUi-handle,
-.noUi-vertical .noUi-handle {
+.noUi-horizontal .noUi-handle .noUi-vertical .noUi-handle {
     background: #007bffc4;
     width: 1px;
     height: 1px;

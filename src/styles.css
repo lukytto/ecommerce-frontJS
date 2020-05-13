@@ -67,6 +67,15 @@ jumbotron effects
 	top: 1px;
 	border: 2px solid transparent;
 
+
+.noUi-horizontal .noUi-handle,
+.noUi-vertical .noUi-handle {
+    background: #007bffc4;
+    width: 1px;
+    height: 1px;
+    left: 6px;
+    top: 1px;
+    border: 2px solid transparent;
 }
 
 .noUi-target.noUi-horizontal .noUi-tooltip {

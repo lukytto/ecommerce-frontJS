@@ -269,13 +269,9 @@ const Card = ({
 	
     return (
 
-        <div className='card' style={{display:'flex'}} >
-            <div className='card-header card-header-1 '>{product.name}
-				<ShowLogo item={product.supplier} url='supplier' />
-				
-				</div>
-			{showImage(showLargeImage)}
-            <div className='card-body'>
+        <div className="card" >
+            <div className="card-header card-header-1 ">{product.name}</div>
+            <div className="card-body">
                 {shouldRedirect(redirect)}
 				<div className="image-stack">
 					

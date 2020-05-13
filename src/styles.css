@@ -175,6 +175,23 @@ card table styles
 	background-color: #dddddd;
 }
 
+/*
+A bigger container
+*/
+.shop-container {
+	max-width: 1600px; 
+	width: 100%;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.container.custom-container {
+      padding: 0 50px;
+    }
+
+
 
 /**
 product image on card

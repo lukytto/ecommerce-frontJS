@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './Layout';
 import Card from './Card';
-import { getCategories, getSub_categories, getSub_sub_categories, getFilteredProducts } from './apiCore';
+import { getCategories, getSub_categories, getSub_sub_categories, getFilteredProducts, getSuppliers } from './apiCore';
 import CheckBox from './Checkbox';
 import { createPriceSlider, createThicknessSlider } from './Sliders';
 
@@ -16,6 +16,7 @@ const Shop = () => {
     const [categories, setCategories] = useState([]);
     const [sub_categories, setSub_categories] = useState([]);
     const [sub_sub_categories, setSub_sub_categories] = useState([]);
+    const [suppliers, setSuppliers] = useState([]);
     const [error, setError] = useState(false);
     const [limit, setLimit] = useState(12);
     const [skip, setSkip] = useState(0);
@@ -50,6 +51,13 @@ const Shop = () => {
                 setError(data.error);
             } else {
                 setSub_sub_categories(data);
+            }
+        });
+        getSuppliers().then(data => {
+            if (data.error) {
+                setError(data.error);
+            } else {
+                setSuppliers(data);
             }
         });
 
@@ -159,7 +167,7 @@ const Shop = () => {
                 <div className='col-lg-2 col-md-2 col-sm-12 col-xs-12'>
 
                     <div>
-                        <h4>Filter by price</h4>
+                        <h4>Price</h4>
                         <br />
                         <div id="priceSlider">
 
@@ -168,16 +176,25 @@ const Shop = () => {
                     </div>
 
                     <div >
-                        <h4>Filter by thickness</h4>
+                        <h4>Thickness</h4>
                         <br />
                         <div id="thicknessSlider">
 
                         </div>
                         <br /><br />
                     </div>
+					
+                    <div>
+                        <h4>Supplier</h4>
+                        <ul>
+                            <CheckBox categories={suppliers}
+                                handleFilters={filters =>
+                                    handleFilters(filters, 'supplier')} />
+                        </ul>
+                    </div>
 
                     <div>
-                        <h4>Filter by category</h4>
+                        <h4>Category</h4>
                         <ul>
                             <CheckBox categories={categories}
                                 handleFilters={filters =>
@@ -186,7 +203,7 @@ const Shop = () => {
                     </div>
 
                     <div>
-                        <h4>Filter by subcategory</h4>
+                        <h4>Subcategory</h4>
                         <ul>
                             <CheckBox categories={sub_categories}
                                 handleFilters={filters =>
@@ -195,7 +212,7 @@ const Shop = () => {
                     </div>
 
                     <div>
-                        <h4>Filter by type</h4>
+                        <h4>Type</h4>
                         <ul>
                             <CheckBox categories={sub_sub_categories}
                                 handleFilters={filters =>

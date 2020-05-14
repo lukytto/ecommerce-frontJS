@@ -12,6 +12,12 @@ const isActive = (history, path) => {
     }
 };
 
+/*
+			<li className='nav-item'>
+				<img className='float-left' style={{maxHeight:41}} src='epticalogo.jpg' alt='Eptica'></img>
+			 </li>
+*/
+
 const Menu = ({ history }) => (
 
     <div>

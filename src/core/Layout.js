@@ -10,9 +10,11 @@ const Layout = ({
 }) => (
         <div>
             <Menu />
-            <div className='jumbotron'>
+            <div className='jumbotron '>
                 <h2>{title}</h2>
                 <p className='lead'>{description}</p>
+				
+				
             </div>
             <div className={className}>{children}</div>
         </div>
@@ -20,3 +22,13 @@ const Layout = ({
     );
 
 export default Layout;
+
+/*
+C:\Users\cilia\Desktop\Eptica\FrontEnd\public\epticalogo.jpg
+
+<img src={`${API}/${url}/photo/${item._id}`}
+				alt={item.name}
+				className='mb-3'
+				style={{ maxHeight: '100%', maxWidth: '100%' }}>
+			</img>
+			*/

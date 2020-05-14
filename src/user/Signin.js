@@ -5,8 +5,8 @@ import { signin, authenticate, isAuthenticated } from '../auth';
 
 const Signin = () => {
     const [values, setValues] = useState({
-        email: '1luka1sa@gmail.com',
-        password: 'aaaaaaa1',
+        email: '',
+        password: '',
         error: '',
         loading: false,
         redirectToReferrer: false,

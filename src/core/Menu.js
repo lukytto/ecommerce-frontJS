@@ -12,16 +12,18 @@ const isActive = (history, path) => {
     }
 };
 
-/*
-			<li className='nav-item'>
-				<img className='float-left' style={{maxHeight:41}} src='epticalogo.jpg' alt='Eptica'></img>
-			 </li>
-*/
+
+
+
 
 const Menu = ({ history }) => (
 
     <div>
         <ul className='nav nav-tabs bg-primary'>
+            {/* <li className='nav-item'>
+                <img className='float-left' style={{ maxHeight: 41 }} src='epticalogo.jpg' alt='Eptica'></img>
+            </li> */}
+
             <li className='nav-item'>
                 <Link className='nav-link' style={isActive(history, '/')} to='/'>Home</Link>
             </li>
